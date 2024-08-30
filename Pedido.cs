@@ -1,16 +1,35 @@
 public class Pedido
 {
-    private int nro;
+    private int id;
     private string obs;
+    private double monto;
     private Cliente cliente;
-    private Estado estado;
+    public Cadete cadete {get; set;}
+    public Estado estado {get; set;}
 
-    public Pedido(int nro, string obs, string nombre, string direccion, string telefono, string datosdireccion, Estado estado)
+    public Pedido(int id, string obs, double monto, string nombre, string dir, string tel, string datosDir, Cadete cadete, Estado estado)
     {
-        this.nro = nro;
+        this.id = id;
         this.obs = obs;
-        this.cliente = new Cliente(nombre, direccion, telefono, datosdireccion);
+        this.monto = monto;
+        cliente = new Cliente(nombre, dir, tel, datosDir);
+        this.cadete = cadete;
         this.estado = estado;
+    }
+
+    public int Id()
+    {
+        return id;
+    }
+
+    public string Obs()
+    {
+        return obs;
+    }
+
+    public double Monto()
+    {
+        return monto;
     }
 
     private class Cliente
