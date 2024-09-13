@@ -1,3 +1,5 @@
+using System.Console;
+
 public class Pedido
 {
     private int id;
@@ -5,38 +7,39 @@ public class Pedido
     private double monto;
     private Cliente cliente;
     public Cadete cadete {get; set;}
-    public Estado estado {get; set;}
+    public Status estado {get; set;}
 
-    public Pedido(int id, string obs, double monto, string nombre, string dir, string tel, string datosDir, Cadete cadete, Estado estado)
+    public Pedido(int id, string obs, double monto, string nombre, string dir, string tel, string datosDir)
     {
         this.id = id;
         this.obs = obs;
         this.monto = monto;
         cliente = new Cliente(nombre, dir, tel, datosDir);
-        this.cadete = cadete;
-        this.estado = estado;
+        cadete = null;
+        estado = Status.Pendiente;
     }
 
-    public int Id()
+    public int Id() => id;
+    public string Obs() => obs;
+    public double Monto() => monto;
+    public Status Estado() => estado;
+    
+    public void VerDireccionCliente()
     {
-        return id;
+        ForegroundColor = ConsoleColor.Yellow;
+        WriteLine($"Cliente: {cliente.Nombre()}");
+        ResetColor();
+        WriteLine($"Direccion: {cliente.Direccion()}");
+        WriteLine($"Datos (direccion): {cliente.DatosDireccion()}");
     }
 
-    public string Obs()
-    {
-        return obs;
-    }
-
-    public double Monto()
-    {
-        return monto;
-    }
+    public void CambiarEstado(Status NuevoEstado) estado = NuevoEstado;
 
     private class Cliente
     {
         private string nombre;
-        private string direccion;
         private string telefono;
+        private string direccion;
         private string datosdireccion;
 
         public Cliente(string nombre, string direccion, string telefono, string datosdireccion)
@@ -46,13 +49,19 @@ public class Pedido
             this.telefono = telefono;
             this.datosdireccion = datosdireccion;
         }
+        
+        
+        public string Nombre() => nombre;
+        public string Telefono() => telefono;
+        public string Direccion() => direccion;
+        public string DatosDireccion() => datosdireccion;
     }
+}
 
-    public enum Estado
-    {
-        Pendiente,
-        Aceptado,
-        EnProceso,
-        Entregado
-    }
+public enum Status
+{
+    Pendiente,
+    Aceptado,
+    EnProceso,
+    Entregado
 }

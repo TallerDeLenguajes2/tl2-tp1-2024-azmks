@@ -25,6 +25,20 @@ class Cadeteria
 
     public void AsignarCadeteAPedido(int idPedido, int idCadete)
     {
+        Pedido miPedido = listaPedidos.Find(ped => ped.Id() == idPedido);
+        Cadete miCadete = listaCadetes.Find(cad => cad.Id() == idCadete);
+
+        if (miPedido == null) WriteLine("Error. Pedido inexistente.");
+        else if (miCadete == null) WriteLine("Error. Cadete inexistente.");
+        else if (miPedido.Estado() != Status.Pendiente) WriteLine("El pedido ya se encuentra asignado.");
+        else
+        {
+
+        }
+    }
+
+    public void ReasignarCadeteAPedido(int idPedido, int idCadete)
+    {
         //
     }
 }

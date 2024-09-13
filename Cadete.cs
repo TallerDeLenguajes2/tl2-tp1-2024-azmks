@@ -13,8 +13,5 @@ public class Cadete
         this.telefono = telefono;
     }
 
-    public int Id()
-    {
-        return id;
-    }
+    public int Id() => id;
 }
